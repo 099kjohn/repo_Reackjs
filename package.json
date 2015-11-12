@@ -1,0 +1,47 @@
+{
+  "name": "bikeshop",
+  "version": "0.1.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "closure": "java -jar /usr/local/closure/compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --language_in ECMASCRIPT5 --js bundle-build.js --warning_level quiet > bundle.js",
+    "browserify": "./node_modules/.bin/browserify -t reactify -p bundle-collapser/plugin ./src/index.js -s catshop -o bundle-build.js",
+    "build": "npm run browserify && npm run closure && rm -f bundle-build.js",
+    "watch-build": "./node_modules/.bin/watchify -t reactify ./src/index.js -s catshop -o bundle.js",
+    "reload": "./node_modules/.bin/reload --port 8082"
+  },
+  "author": "Anonymous",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^5.12.1",
+    "crypto-browserify": "^3.2.5",
+    "reload": "^0.1.0",
+    "watchify": "^1.0.6",
+    "reactify": "^0.14.0",
+    "bundle-collapser": "^1.1.0"
+  },
+  "repository": {
+    "url": "",
+    "type": "git"
+  },
+  "dependencies": {
+    "secure-random": "^1.1.1",
+    "coinkey": "^1.2.0",
+    "qr-encode": "^0.2.0",
+    "coininfo": "^0.2.1",
+    "react": "^0.11.2",
+    "react-bootstrap": "^0.12.0",
+    "hdkey": "^0.4.0",
+    "lodash": "^2.4.1"
+  },
+  "browser": {
+    "crypto": "crypto-browserify",
+    "@addresses": "./src/addresses.js",
+    "@cat-data": "./src/cat-data.js",
+    "@helloblock": "./src/helloblock.js",
+    "@storage": "./src/storage.js",
+    "@config": "./src/config.js",
+    "@url": "./src/url.js"
+  },
+  "private": true
+}
